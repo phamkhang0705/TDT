@@ -1,0 +1,38 @@
+﻿@using webNews.Domain
+@using webNews.Security
+@{
+    HomePageInfo pageInfo = new HomePageInfo();
+    var banners = Authentication.GetBanners();
+    if (Page.info != null)
+    {
+        pageInfo = Page.info as HomePageInfo;
+    }
+}
+
+@{
+    if (banners != null && banners.Count > 0)
+    {
+        <div class="bg_banner">
+            <div class="w-body-l">
+                <div class="bannerFade">
+                    <ul class="list-item">
+                        @{
+                            for (var i = 0; i < banners.Count; i++)
+                            {
+                                <li class="banner-item-@i">
+                                    <a href="@banners[i].Slug" target="_blank" title="@banners[i].Title">
+                                        <img src="@banners[i].Image" alt="@banners[i].Title" />
+                                    </a>
+                                </li>
+                            }
+                        }
+
+                    </ul>
+                    <div class="nav">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+}

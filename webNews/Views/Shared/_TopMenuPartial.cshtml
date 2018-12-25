@@ -1,0 +1,59 @@
+﻿@using webNews.Security
+<div class="w-header">
+    <div class="w-header-l">
+        <a href="/home"></a>
+    </div>
+    <div class="w-header-r">
+        <ul class="lt w-header-search">
+            <li>
+                <form action="#" method="post">
+                    <input id="keyword" name="keyword" type="text" autocomplete="off" value="Search" onblur="if(this.value == ''){this.value = 'Search';}" onfocus="if(this.value == 'Search'){this.value = '';};" />
+                </form>
+            </li>
+            <li><a class="language-vi" href="/home/SetCulture/vi"></a></li>
+            <li><a class="language-en" href="/home/SetCulture/en"></a></li>
+        </ul>
+        <div class="cl">
+        </div>
+        <ul class="lt w-header-menu">
+            @Html.Raw(Authentication.GetMenuFE())
+        </ul>
+        <script type="text/javascript">
+            $(document).ready(function () {
+
+                var _activeUrl = "";
+
+                if (_activeUrl != "") {
+                    var _objMenuActive = $("ul.w-header-menu li a");
+                    _objMenuActive.removeClass("active");
+
+                    $(_objMenuActive).each(function() {
+                        if ($(this).attr("href") == _activeUrl) {
+                            $(this).addClass("active");
+                        }
+                    });
+                } else {
+                    var pathArray = window.location.pathname.split('/');
+                    //if (window.location.pathname.startsWith('/')) {
+                    //    _activeUrl = pathArray
+                    //}
+                    _activeUrl = pathArray[1].toLowerCase();
+
+                    var _objMenuActive = $("ul.w-header-menu li a");
+                    _objMenuActive.removeClass("active");
+
+                    $(_objMenuActive).each(function () {
+                        if ($(this).attr("href").toLowerCase() == "/" + _activeUrl) {
+                            $(this).addClass("active");
+                        }
+                    });
+                }
+            });
+        </script>
+
+        <div class="cl">
+        </div>
+    </div>
+    <div class="cl">
+    </div>
+</div>
